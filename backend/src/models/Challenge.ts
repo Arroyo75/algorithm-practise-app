@@ -1,9 +1,9 @@
 import mongoose, { Document } from 'mongoose';
-import { Challange } from '../types/challange';
+import { Challenge } from '../types/challenge';
 
-export interface ChallangeDocument extends Challange, Document {}
+export interface ChallengeDocument extends Challenge, Document {}
 
-const challangeSchema = new mongoose.Schema<ChallangeDocument>({
+const challangeSchema = new mongoose.Schema<ChallengeDocument>({
   title: { type: String, requried: true },
   difficulty: {
     type: String ,
@@ -22,4 +22,4 @@ const challangeSchema = new mongoose.Schema<ChallangeDocument>({
   }
 })
 
-export default mongoose.model<ChallangeDocument>('Challange', challangeSchema);
+export default mongoose.model<ChallengeDocument>('Challange', challangeSchema);

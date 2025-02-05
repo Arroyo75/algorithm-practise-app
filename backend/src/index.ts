@@ -5,7 +5,7 @@ import cors from 'cors';
 import path from 'path';
 import { connectDB } from './config/db';
 
-import challangeRoutes from './routes/challangeRoutes';
+import challengeRoutes from './routes/challengeRoutes';
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/challanges', challangeRoutes);
+app.use('/api/challenges', challengeRoutes);
 
 const PORT = process.env.PORT || 5000;
 
