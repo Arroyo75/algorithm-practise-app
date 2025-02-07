@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { 
   Box, 
   Table, 
@@ -11,26 +11,30 @@ import {
   Input,
   Select,
   Flex
-} from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { Challenge } from '../types/challenge'
+} from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { Challenge, ApiResponse } from '../types/challange';
 
 const ChallengeList = () => {
-  const [challenges, setChallenges] = useState<Challenge[]>([])
-  const [search, setSearch] = useState('')
-  const [difficulty, setDifficulty] = useState('')
-  const navigate = useNavigate()
+  const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const [search, setSearch] = useState('');
+  const [difficulty, setDifficulty] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchChallenges = async () => {
       try {
-        const params = new URLSearchParams()
-        if (search) params.append('search', search)
-        if (difficulty) params.append('difficulty', difficulty)
+        const params = new URLSearchParams();
+        if (search) params.append('search', search);
+        if (difficulty) params.append('difficulty', difficulty);
 
-        const response = await axios.get(`http://localhost:5000/api/challenges?${params}`)
-        setChallenges(response.data.data)
+        const response = await fetch(`http://localhost:5000/api/challenges?${params}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data: ApiResponse<Challenge[]> = await response.json();
+        setChallenges(data.data);
       } catch (error) {
         console.error('Error fetching challenges:', error)
       }
@@ -90,6 +94,7 @@ const ChallengeList = () => {
             </Tr>
           ))}
         </Tbody>
+        
       </Table>
     </Box>
   )
