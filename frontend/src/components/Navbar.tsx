@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Container, Flex, Button, HStack, Text} from '@chakra-ui/react';
 
 const Navbar = () => {
@@ -23,7 +22,7 @@ const Navbar = () => {
                     fontWeight={"bold"}
                     textTransform={"uppercase"}
                     textAlign={"center"}
-                    bgGradient={"linear(to-r, orange.400, red.500)"}
+                    bgGradient={"linear(to-r, purple.400, purple.600)"}
                     bgClip={"text"}
                 >
                     ALGORITHMS
@@ -35,7 +34,7 @@ const Navbar = () => {
                         fontWeight={"bold"}
                         textAlign={"center"}
                         bg={"gray.900"}
-                        bgGradient={"linear(to-r, orange.400, red.500)"}
+                        bgGradient={"linear(to-r, purple.400, purple.600)"}
                         bgClip={"text"}
                         mt={{base: 3, md: 0}}
                         _hover={{bgGradient: "linear(to-r, yellow.400, pink.500)",
@@ -50,7 +49,7 @@ const Navbar = () => {
                         fontWeight={"bold"}
                         textAlign={"center"}
                         bg={"gray.900"}
-                        bgGradient={"linear(to-r, orange.400, red.500)"}
+                        bgGradient={"linear(to-r, purple.400, purple.600)"}
                         bgClip={"text"}
                         mt={{base: 3, md: 0}}
                         _hover={{bgGradient: "linear(to-r, yellow.400, pink.500)",
@@ -65,7 +64,21 @@ const Navbar = () => {
                         fontWeight={"bold"}
                         textAlign={"center"}
                         bg={"gray.900"}
-                        bgGradient={"linear(to-r, orange.400, red.500)"}
+                        bgGradient={"linear(to-r, purple.400, purple.600)"}
+                        bgClip={"text"}
+                        _hover={{bgGradient: "linear(to-r, yellow.400, pink.500)",
+                            transform: "translateY(-5px)"}}
+                        _active={{bg: "gray.900"}}
+                    >
+                        Progress
+                    </Button>
+                    <Button
+                        variant={"link"}
+                        fontSize={{ base:"16", sm:"18"}}
+                        fontWeight={"bold"}
+                        textAlign={"center"}
+                        bg={"gray.900"}
+                        bgGradient={"linear(to-r, purple.400, purple.600)"}
                         bgClip={"text"}
                         _hover={{bgGradient: "linear(to-r, yellow.400, pink.500)",
                             transform: "translateY(-5px)"}}

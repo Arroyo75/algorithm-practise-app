@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Box } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
-import ChallangeList from "./pages/ChallangeList";
+import ChallengeList from "./pages/ChallengeList";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Navbar />
       <Routes>
 
-        <Route path="/" element={<ChallangeList />} />
+        <Route path="/" element={<ChallengeList />} />
 
       </Routes>
     </Box>
