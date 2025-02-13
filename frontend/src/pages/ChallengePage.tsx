@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'reac-router-dom';
-import { Box, Grid, Button, Text, VStack } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import Editor, { loader } from "@monaco-editor/react";
 
 loader.config({
@@ -10,12 +9,11 @@ loader.config({
 });
 
 const ChallengePage = () => {
-  const { id } = useParams();
   const [code, setCode] = useState('');
   const [isEditorReady, setIsEditorReady] = useState(false);
 
   const handleEditorDidMount = () => {
-    setIsEdtiorReady(true);
+    setIsEditorReady(true);
   };
 
   return (
