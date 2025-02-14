@@ -56,9 +56,10 @@ const ChallengeList = () => {
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
           </Select>
-          <Button>
-            Include Completed
-          </Button>
+          <Select flex="1">
+            <option>Include Completed</option>
+            <option>Exclude Completed</option>
+          </Select>
           <Button>
             New Challange
           </Button>
