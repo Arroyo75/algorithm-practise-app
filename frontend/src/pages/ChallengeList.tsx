@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { 
   Box,
   Input,
@@ -6,40 +6,22 @@ import {
   Flex,
   SimpleGrid,
   HStack,
-  Button
+  Button,
+  Spinner
 } from '@chakra-ui/react';
-import { Challenge, ApiResponse } from '../types/challenge';
 import ChallengeTile from '../components/ChallengeTile';
+import { useChallengeStore } from '../stores/challengeStore';
+
 
 const ChallengeList = () => {
-  const [challenges, setChallenges] = useState<Challenge[]>([]);
-  const [search, setSearch] = useState('');
-  const [difficulty, setDifficulty] = useState('');
+  const { challenges, search, difficulty, isLoading, error, fetchChallenges, setSearch, setDifficulty } = useChallengeStore();
 
   useEffect(() => {
-    const fetchChallenges = async () => {
-      try {
-        const params = new URLSearchParams();
-        if (search) params.append('search', search);
-        if (difficulty) params.append('difficulty', difficulty);
-
-        const response = await fetch(`http://localhost:5000/api/challenges?${params}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data: ApiResponse<Challenge[]> = await response.json();
-        setChallenges(data.data);
-      } catch (error) {
-        console.error('Error fetching challenges:', error)
-      }
-    }
-
     fetchChallenges()
   }, [search, difficulty])
 
   return (
-    <Box p={8}>
+    <Box p={8} position="absolute" left={0} right={0} bg="gray.800">
       <Flex gap={"1vw"} mb={4} flexDir={{ md: 'row', base: 'column'}}>
         <Input
           placeholder="Search challenges..."
@@ -66,20 +48,30 @@ const ChallengeList = () => {
         </HStack>
       </Flex>
 
-      <SimpleGrid
-        columns={{
-          base: 1,
-          sm: 2,
-          lg: 3,
-          xl: 4
-        }}
-        spacing={"1vw"}
-        w={"full"}
-      >
-        {challenges.map((challenge) => (
-          <ChallengeTile key={challenge._id} challenge={challenge} />
-        ))}
-      </SimpleGrid>
+      {isLoading ? (
+        <Flex justify="center" align="center" h="50vh">
+          <Spinner size="xl" />
+        </Flex>
+      ) : error ? (
+        <Flex justify="center" align="center" h="50vh" color="red.500">
+          {error}
+        </Flex>
+      ) : (
+        <SimpleGrid
+          columns={{
+            base: 1,
+            sm: 2,
+            lg: 3,
+            xl: 4
+          }}
+          spacing="1vw"
+          w="full"
+        >
+          {challenges.map((challenge) => (
+            <ChallengeTile key={challenge._id} challenge={challenge} />
+          ))}
+        </SimpleGrid>
+      )}
     </Box>
   )
 }

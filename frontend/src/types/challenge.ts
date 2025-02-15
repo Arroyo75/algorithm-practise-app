@@ -16,3 +16,19 @@ export interface ApiResponse<T> {
   data: T;
   message?: string;
 }
+
+export interface ChallengeStore {
+  challenges: Challenge[];
+  search: string;
+  difficulty: string;
+  currentChallenge: Challenge | null;
+  code: string;
+  isLoading: boolean;
+  error: string | null;
+  fetchChallenges: () => Promise<void>;
+  fetchChallenge: (id: string) => Promise<void>;
+  setSearch: (search: string) => void;
+  setDifficulty: (difficulty: string) => void;
+  setCode: (code: string) => void;
+  submitCode: (challengeId: string, code: string) => Promise<void>;
+}
