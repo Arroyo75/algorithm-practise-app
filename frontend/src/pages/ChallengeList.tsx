@@ -17,7 +17,7 @@ const ChallengeList = () => {
   const { challenges, search, difficulty, isLoading, error, fetchChallenges, setSearch, setDifficulty } = useChallengeStore();
 
   useEffect(() => {
-    fetchChallenges()
+    fetchChallenges();
   }, [search, difficulty])
 
   return (

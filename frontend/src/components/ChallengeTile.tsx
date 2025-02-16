@@ -35,14 +35,14 @@ const ChallengeTile = ({ challenge }: ChallengeTileProps) => {
       border="1px"
       borderColor={diffColor}
       transition="all 0.2s"
-      minW={{ base: "70vw", md: "23.25vw"}}
+      minW={{ base: "70vw", sm: "23.25vw"}}
     >
       <HStack justify="space-between">
         <Text fontSize="sm" fontWeight="medium" color={diffColor}>{challenge.title}</Text>
         <HStack spacing={3}>
           <IconButton
            aria-label="Play"
-           onClick={() => {navigate(`/`)}}
+           onClick={() => {navigate(`/challenge/${challenge._id}`)}}
            icon={<CiPlay1 />}
            fontSize={20}
            colorScheme="green"
