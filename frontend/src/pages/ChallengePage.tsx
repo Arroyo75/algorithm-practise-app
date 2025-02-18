@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { Box, Button, HStack, Text, VStack, Heading } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Flex, Box, Button, HStack, Text, VStack, Spinner } from '@chakra-ui/react';
 import Editor, { loader } from "@monaco-editor/react";
+import { useChallengeStore } from '../stores/challengeStore';
 
 loader.config({
   paths: {
@@ -9,8 +11,47 @@ loader.config({
 });
 
 const ChallengePage = () => {
+  const { id } = useParams();
+  const { currentChallenge, isLoading, error, fetchChallenge } = useChallengeStore();
   const [code, setCode] = useState('');
   const [isEditorReady, setIsEditorReady] = useState(false);
+
+  useEffect(() => {
+    if(id) {
+      fetchChallenge(id);
+    }
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" align="center" minH="50vh">
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='orange.500'
+          size='xl'
+        />
+      </Flex>
+    );
+  }
+
+  if (error) {
+    return (
+      <Flex justify="center" align="center" minH="50vh">
+        <Text color="red.500">{error}</Text>
+      </Flex>
+    );
+  }
+
+  if (!currentChallenge) {
+    return (
+      <Flex justify="center" align="center" minH="50vh">
+        <Text>Challenge not found</Text>
+      </Flex>
+    );
+  }
+
 
   const handleEditorDidMount = () => {
     setIsEditorReady(true);
@@ -20,12 +61,10 @@ const ChallengePage = () => {
     <Box p={4}>
       <HStack>
         <VStack>
-          <Heading>
-
-          </Heading>
-          <Text>
-            
+          <Text fontSize="2xl" fontWeight="bold" color="gray.200">
+            {currentChallenge.title}
           </Text>
+          <Text mt={4}>{currentChallenge.description}</Text>
         </VStack>
         <Box p={4}>
           <Editor
