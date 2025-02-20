@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Flex, Box, Button, HStack, Text, VStack, Spinner, Grid, GridItem, Badge } from '@chakra-ui/react';
+import { Flex, Box, Button, Text, Spinner, Badge } from '@chakra-ui/react';
 import Editor, { loader } from "@monaco-editor/react";
 import { useChallengeStore } from '../stores/challengeStore';
 
@@ -58,83 +58,65 @@ const ChallengePage = () => {
   };
 
   return (
-    <Box p={4}>
-      <Grid
-      templateColumns="repeat(2, 1fr)"
-      gap={4}
-      h="calc(100vh - 64px)" // Adjust based on your navbar height
-      p={4}
-    >
-      {/* Left side - Challenge description */}
-      <GridItem 
-        overflowY="auto" 
-        p={6}
-        bg="gray.800"
-        borderRadius="lg"
+    <Box p={4} bg="gray.800">
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        gap="1vw"
+        h="calc(100vh - 64px)"
+        p={4}
       >
-        <Text 
-          fontSize="2xl" 
-          fontWeight="bold" 
-          color="white"
-          mb={4}
+        <Box
+          flex={{ base: '1', md: '1' }}
+          overflowY="auto"
+          p={6}
+          bg="gray.800" 
+          borderRadius="lg"
+          minH={{ base: 'fit-content', md: 'full' }}
+          w={{ base: "90vw", md: "45vw" }}
         >
-          {currentChallenge.title}
-          <Badge 
-            ml={2}
-            colorScheme={
-              currentChallenge.difficulty === 'Easy' ? 'green' : 
-              currentChallenge.difficulty === 'Medium' ? 'yellow' : 
-              'red'
-            }
+          <Text 
+            fontSize="2xl"
+            fontWeight="bold"
+            color="white"
+            mb={4}
           >
-            {currentChallenge.difficulty}
-          </Badge>
-        </Text>
-        <Text color="gray.200" whiteSpace="pre-wrap">
-          {currentChallenge.description}
-        </Text>
-      </GridItem>
+            {currentChallenge.title}
+            <Badge 
+              ml={2}
+              colorScheme={
+                currentChallenge.difficulty === 'Easy' ? 'green' : 
+                currentChallenge.difficulty === 'Medium' ? 'yellow' : 
+                'red'
+              }
+            >
+              {currentChallenge.difficulty}
+            </Badge>
+          </Text>
+          <Text color="gray.200" whiteSpace="pre-wrap">
+            {currentChallenge.description}
+          </Text>
+        </Box>
 
-      {/* Right side - Code editor */}
-      <GridItem>
-        <Box h="full" position="relative">
+        {/* Code editor */}
+        <Box 
+          flex={{ base: '1', md: '1' }}
+          minH={{ base: '50vh', md: 'full' }}
+          w={{ base: "90vw", md: "45vw" }}
+        >
           <Editor
             height="100%"
             defaultLanguage="javascript"
             defaultValue="// Your code here"
+            value={code}
+            onChange={(value) => setCode(value || '')}
             theme="vs-dark"
+            onMount={handleEditorDidMount}
+            loading={<Text>Loading editor...</Text>}
             options={{
               minimap: { enabled: false },
               fontSize: 14,
               wordWrap: 'on'
             }}
-          />
-        </Box>
-      </GridItem>
-    </Grid>
-      <HStack>
-        <VStack>
-          <Text fontSize="2xl" fontWeight="bold" color="gray.200">
-            {currentChallenge.title}
-          </Text>
-          <Text mt={4}>{currentChallenge.description}</Text>
-        </VStack>
-        <Box p={4}>
-          <Editor
-          height="70vh"
-          width="full"
-          defaultLanguage='javascript'
-          value={code}
-          onChange={(value) => setCode(value || '')}
-          theme="vs-dark"
-          onMount={handleEditorDidMount}
-          loading={<Text>Loading editor...</Text>}
-          options={{
-            minimap: { enabled: false },
-            fontSize: 14,
-            wordWrap: 'on',
-            automaticLayout: true
-          }}
           />
           <Button
             mt={4}
@@ -144,7 +126,7 @@ const ChallengePage = () => {
             Run Code
           </Button>
         </Box>
-      </HStack>
+      </Flex>
     </Box>
   );
 };

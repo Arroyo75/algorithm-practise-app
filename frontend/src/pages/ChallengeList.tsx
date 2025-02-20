@@ -21,7 +21,7 @@ const ChallengeList = () => {
   }, [search, difficulty])
 
   return (
-    <Box p={8} position="absolute" left={0} right={0} bg="gray.800">
+    <Box p={8} left={0} right={0} bg="gray.800">
       <Flex gap={"1vw"} mb={4} flexDir={{ md: 'row', base: 'column'}}>
         <Input
           placeholder="Search challenges..."
