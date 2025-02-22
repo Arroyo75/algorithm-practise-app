@@ -72,7 +72,7 @@ const ChallengePage = () => {
           bg="gray.800" 
           borderRadius="lg"
           minH={{ base: 'fit-content', md: 'full' }}
-          w={{ base: "90vw", md: "45vw" }}
+          w={{ base: "90vw", md: "35vw" }}
         >
           <Text 
             fontSize="2xl"
@@ -99,12 +99,12 @@ const ChallengePage = () => {
 
         {/* Code editor */}
         <Box 
-          flex={{ base: '1', md: '1' }}
+          flex={{ base: '1', md: '2' }}
           minH={{ base: '50vh', md: 'full' }}
-          w={{ base: "90vw", md: "45vw" }}
+          w={{ base: "90vw", md: "55vw" }}
         >
           <Editor
-            height="100%"
+            height="75vh"
             defaultLanguage="javascript"
             defaultValue="// Your code here"
             value={code}
