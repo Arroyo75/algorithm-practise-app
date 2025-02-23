@@ -95,6 +95,11 @@ const ChallengePage = () => {
           <Text color="gray.200" whiteSpace="pre-wrap">
             {currentChallenge.description}
           </Text>
+          {currentChallenge.testCases.map((testCase, index) => (
+            <Text key={index} color="gray.200" mb={2}>
+              {index + 1}. Input: {testCase.input}
+            </Text>
+          ))}
         </Box>
 
         {/* Code editor */}
