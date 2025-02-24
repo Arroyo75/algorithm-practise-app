@@ -100,6 +100,11 @@ const ChallengePage = () => {
               {index + 1}. Input: {testCase.input}
             </Text>
           ))}
+          {currentChallenge.testCases.map((testCase, index) => (
+            <Text key={index} color="gray.200" mb={2}>
+            {index + 1}. Expected Output: {testCase.expectedOutput}
+            </Text>
+          ))}
         </Box>
 
         {/* Code editor */}
