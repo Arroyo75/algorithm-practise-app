@@ -95,14 +95,20 @@ const ChallengePage = () => {
           <Text color="gray.200" whiteSpace="pre-wrap">
             {currentChallenge.description}
           </Text>
+          <Text color="gray.200" whiteSpace="pre-wrap" mt={2}>
+            Input
+          </Text>
           {currentChallenge.testCases.map((testCase, index) => (
             <Text key={index} color="gray.200" mb={2}>
-              {index + 1}. Input: {testCase.input}
+              {index + 1}: {testCase.input}
             </Text>
           ))}
+          <Text color="gray.200" whiteSpace="pre-wrap" mt={2}>
+            Expected Output
+          </Text>
           {currentChallenge.testCases.map((testCase, index) => (
             <Text key={index} color="gray.200" mb={2}>
-            {index + 1}. Expected Output: {testCase.expectedOutput}
+            {index + 1}: {testCase.expectedOutput}
             </Text>
           ))}
         </Box>
