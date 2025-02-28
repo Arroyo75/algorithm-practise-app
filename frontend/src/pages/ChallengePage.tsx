@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Flex, Box, Button, Text, Spinner, Badge } from '@chakra-ui/react';
+import { Flex, Box, Button, Text, Spinner, Badge, HStack } from '@chakra-ui/react';
 import Editor, { loader } from "@monaco-editor/react";
 import { useChallengeStore } from '../stores/challengeStore';
 
@@ -113,7 +113,6 @@ const ChallengePage = () => {
           ))}
         </Box>
 
-        {/* Code editor */}
         <Box 
           flex={{ base: '1', md: '2' }}
           minH={{ base: '50vh', md: 'full' }}
@@ -134,13 +133,21 @@ const ChallengePage = () => {
               wordWrap: 'on'
             }}
           />
-          <Button
-            mt={4}
-            colorScheme="green"
-            isDisabled={!isEditorReady}
-          >
-            Run Code
-          </Button>
+          <HStack mt={4} spacing={4}>
+            <Button
+              colorScheme="green"
+              isDisabled={!isEditorReady}
+            >
+              Run Code
+            </Button>
+            <Button
+              bg="gray.900"
+              borderColor="green.400"
+              color="green.400"
+            >
+              Submit
+            </Button>
+          </HStack>
         </Box>
       </Flex>
     </Box>
