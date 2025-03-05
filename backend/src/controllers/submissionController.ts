@@ -13,7 +13,6 @@ export const runCode = async (req: Request, res: Response) => {
       });
     }
     
-    // Get the challenge to access test cases
     const challenge = await Challenge.findById(challengeId);
     if (!challenge) {
       return res.status(404).json({ 
@@ -21,11 +20,9 @@ export const runCode = async (req: Request, res: Response) => {
         message: 'Challenge not found' 
       });
     }
-    
-    // Get the visible test cases
+
     const testCases = challenge.testCases.filter(test => !test.isHidden);
     
-    // Run the code against each test case
     const results = await Promise.all(
       testCases.map(async (testCase, index) => {
         try {
@@ -34,8 +31,7 @@ export const runCode = async (req: Request, res: Response) => {
             language,
             testCase.input
           );
-          
-          // Determine if the test passed
+
           const output = result.stdout ? result.stdout.trim() : '';
           const passed = output === testCase.expectedOutput.trim();
           
