@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-type LanguageId = 63 | 71 | 62; // JavaScript, Python, Java
+type LanguageId = 63 | 71 | 62 | 54 | 51 | 50;
 
 interface JudgeSubmission {
   source_code: string;
@@ -38,7 +38,10 @@ const JUDGE_HEADERS = {
 const LANGUAGE_MAP: Record<string, LanguageId> = {
   javascript: 63,
   python: 71,
-  java: 62
+  java: 62,
+  cpp: 54,
+  csharp: 51,
+  c: 50
 };
 
 const encodeBase64 = (str: string): string => Buffer.from(str).toString('base64');
