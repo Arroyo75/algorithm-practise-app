@@ -28,3 +28,23 @@ const userSchema = new mongoose.Schema({
     minlength: 6
   }
 }, { timestamps: true });
+
+userSchema.pre('save', async function(next) {
+  const user = this as UserDocument;
+  
+  if (!user.isModified('password')) return next();
+  
+  try {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+    next();
+  } catch (error) {
+    next(error as Error);
+  }
+});
+
+userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password);
+};
+
+export default mongoose.model<UserDocument>('User', userSchema);
