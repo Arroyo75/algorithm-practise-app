@@ -6,6 +6,7 @@ import path from 'path';
 import { connectDB } from './config/db';
 
 import challengeRoutes from './routes/challengeRoutes';
+import authRoutes from './routes/authRoutes';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/challenges', challengeRoutes);
+app.use('api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
